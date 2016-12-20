@@ -14,22 +14,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView mainListView; // ListView object
-        ArrayAdapter mArrayAdapter; // ArrayAdapter object
         ArrayList mNameList = new ArrayList();
-
-        // Access the ListView
-        mainListView = (ListView) findViewById(R.id.list);
-
-        // Create an ArrayAdapter for the ListView
+        ArrayAdapter mArrayAdapter;
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mNameList);
 
-        // Set the ListView to use the ArrayAdapter
+        ListView mainListView;
+        mainListView = (ListView) findViewById(R.id.list);
         mainListView.setAdapter(mArrayAdapter);
 
-        mNameList.add("list item");
+        for (int i = 0; i < 30; i = i + 1) {
+            mNameList.add(Integer.toString(i));
+        }
+
         mArrayAdapter.notifyDataSetChanged();
 
     }
