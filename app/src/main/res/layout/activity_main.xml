@@ -10,9 +10,11 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.connor.android_address_book.MainActivity">
 
-    <ListView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/list_view"
+    <fragment android:name="com.connor.android_address_book.ContactsFragment"
+        android:id="@+id/contacts_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+
 
 </RelativeLayout>

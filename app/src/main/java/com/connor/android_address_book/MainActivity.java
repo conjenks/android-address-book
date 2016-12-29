@@ -27,49 +27,49 @@ public class MainActivity extends AppCompatActivity {
                 mNameList);
 
         ListView mainListView;
-        mainListView = (ListView) findViewById(R.id.list_view);
-        mainListView.setAdapter(mArrayAdapter);
-
-        for (int i = 0; i < 30; i = i + 1) {
-            mNameList.add(Integer.toString(i));
-        }
-
-        mArrayAdapter.notifyDataSetChanged();
+//        mainListView = (ListView) findViewById(R.id.list_view);
+//        mainListView.setAdapter(mArrayAdapter);
+//
+//        for (int i = 0; i < 30; i = i + 1) {
+//            mNameList.add(Integer.toString(i));
+//        }
+//
+//        mArrayAdapter.notifyDataSetChanged();
 
         //---------------------------------------------------------------------------------------------
         // looking at SQLite databases
         // http://sarangasl.blogspot.com/2009/09/create-android-database.html
-        SQLiteDatabase myDB = null;
-        String TableName = "myTable";
-
-        String Data = "";
-
-        try {
-            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
-            myDB.execSQL("CREATE TABLE IF NOT EXISTS " + TableName + " (Field1, Field2)" + " VALUES ('Saranga', 22);");
-
-            Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
-
-            int Column1 = c.getColumnIndex("Field1");
-            int Column2 = c.getColumnIndex("Field2");
-
-            c.moveToFirst();
-            if (c != null) {
-                do {
-                    String Name = c.getString(Column1);
-                    int Age = c.getInt(Column2);
-                    Data = Data + Name + "/" + Age + "\n";
-                } while (c.moveToNext());
-                }
-            TextView tv = new TextView(this);
-            tv.setText(Data);
-            setContentView(tv);
-        } catch(Exception e) {
-            Log.e("Error", "Error", e);
-        } finally {
-            if (myDB != null)
-                myDB.close();
-        }
+//        SQLiteDatabase myDB = null;
+//        String TableName = "myTable";
+//
+//        String Data = "";
+//
+//        try {
+//            myDB = this.openOrCreateDatabase("DatabaseName", MODE_PRIVATE, null);
+//            myDB.execSQL("CREATE TABLE IF NOT EXISTS " + TableName + " (Field1, Field2)" + " VALUES ('Saranga', 22);");
+//
+//            Cursor c = myDB.rawQuery("SELECT * FROM " + TableName, null);
+//
+//            int Column1 = c.getColumnIndex("Field1");
+//            int Column2 = c.getColumnIndex("Field2");
+//
+//            c.moveToFirst();
+//            if (c != null) {
+//                do {
+//                    String Name = c.getString(Column1);
+//                    int Age = c.getInt(Column2);
+//                    Data = Data + Name + "/" + Age + "\n";
+//                } while (c.moveToNext());
+//                }
+//            TextView tv = new TextView(this);
+//            tv.setText(Data);
+//            setContentView(tv);
+//        } catch(Exception e) {
+//            Log.e("Error", "Error", e);
+//        } finally {
+//            if (myDB != null)
+//                myDB.close();
+//        }
     }
 
     protected void onPause(Bundle savedInstanceState) {
