@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.content.CursorLoader;
 
+import static com.connor.android_address_book.AddressDatabaseContract.AddressTable.CELL;
 import static com.connor.android_address_book.AddressDatabaseContract.AddressTable.NAME;
 
 public class AddressDatabaseHelper extends SQLiteOpenHelper {
@@ -25,20 +26,21 @@ public class AddressDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(AddressDatabaseContract.AddressTable.CREATE_TABLE);
 
-        String[] PROJECTION = {
-                ContactsContract.Contacts._ID, // _ID is always required
-                ContactsContract.Contacts.DISPLAY_NAME_PRIMARY // that's what we want to display
-        };
-        Uri contentUri = ContactsContract.Contacts.CONTENT_URI;
-        CursorLoader contactCursor = new CursorLoader(context, contentUri, PROJECTION, null, null, "display_name");
-        insertCursorIntoDB(contactCursor.loadInBackground(), db);
+        Uri uri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        String[] projection = new String[] {ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+                ContactsContract.CommonDataKinds.Phone.NUMBER};
+        Cursor people = context.getContentResolver().query(uri, projection, null, null, null);
+        insertCursorIntoDB(people, db);
     }
 
     public void insertCursorIntoDB(Cursor cursor, SQLiteDatabase db) {
+        int indexName = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+        int indexNumber = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
         if (cursor != null) {
             while(cursor.moveToNext()) {
                 ContentValues values = new ContentValues();
-                values.put(NAME, cursor.getString(3));
+                values.put(NAME, cursor.getString(indexName));
+                values.put(CELL, cursor.getString(indexNumber));
                 db.insertOrThrow("addresses", null, values);
             }
         }
