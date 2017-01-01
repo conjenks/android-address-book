@@ -12,7 +12,7 @@ public final class AddressDatabaseContract {
         public static final String TABLE_NAME = "addresses";
         public static final String NAME = "name";
         // phone numbers
-        public static final String CELL = "cellPhone"; // turn these into types that can only integers and dashes
+        public static final String CELL = "cellPhone"; // turn these into types that can only hold integers and dashes?
         public static final String WORK = "workPhone";
         public static final String HOME = "homePhone";
         // emails

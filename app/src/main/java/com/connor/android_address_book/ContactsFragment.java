@@ -11,14 +11,9 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cursor> {
 
-    private static final String TAG = ContactsFragment.class.getSimpleName();
     private CursorAdapter mAdapter;
     private static final int layout = android.R.layout.simple_list_item_1;;
 
@@ -31,7 +26,6 @@ public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cu
         Cursor c = null; // there is no cursor yet
         int flags = 0; // no auto-requery! Loader requeries.
         mAdapter = new SimpleCursorAdapter(context, layout, c, FROM, TO, flags);
-        Log.d(TAG, "onCreate");
     }
 
     @Override
@@ -42,7 +36,6 @@ public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cu
         setListAdapter(mAdapter);
         // and tell loader manager to start loading
         getLoaderManager().initLoader(0, null, this);
-        Log.d(TAG, "onActivityCreated");
     }
 
     // columns requested from the database
@@ -60,9 +53,8 @@ public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cu
         // load from the "Contacts table"
         Uri contentUri = Contacts.CONTENT_URI;
 
-        // no sub-selection, no sort order, simply every row
+        // no sub-selection, display_name sort order, simply every row
         // projection says we want just the _id and the name column
-        Log.d(TAG, "onCreateLoader");
         return new CursorLoader(getActivity(), contentUri, PROJECTION, null, null, "display_name");
 
     }
@@ -70,14 +62,12 @@ public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cu
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Once cursor is loaded, give it to adapter
-        Log.d(TAG, "onLoadFinished");
         mAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         // on reset take any old cursor away
-        Log.d(TAG, "onLoaderReset");
         mAdapter.swapCursor(null);
     }
 }
