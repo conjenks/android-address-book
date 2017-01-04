@@ -2,6 +2,8 @@ package com.connor.android_address_book;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract.Contacts;
@@ -11,8 +13,9 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.util.Log;
 
-public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cursor> {
+public class ContactsFragment extends ListFragment {
 
     private CursorAdapter mAdapter;
     private static final int layout = android.R.layout.simple_list_item_1;;
@@ -21,11 +24,18 @@ public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cu
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // create adapter once
         Context context = getActivity();
-        Cursor c = null; // there is no cursor yet
-        int flags = 0; // no auto-requery! Loader requeries.
+        AddressDatabaseHelper dbHelper = new AddressDatabaseHelper(context);
+        // get the database, if it does not exist this is where it will be created
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // create adapter once
+        Cursor c = db.rawQuery("SELECT * FROM " + AddressDatabaseContract.AddressTable.TABLE_NAME, null);
+        Log.d("DEBUG", DatabaseUtils.dumpCursorToString(c));
+        int flags = 0; // no auto-requery!
         mAdapter = new SimpleCursorAdapter(context, layout, c, FROM, TO, flags);
+        db.rawQuery(AddressDatabaseContract.AddressTable.DELETE_TABLE, null);
+        Log.d("DEBUG", "Table dropped");
     }
 
     @Override
@@ -35,39 +45,10 @@ public class ContactsFragment extends ListFragment implements LoaderCallbacks<Cu
         // each time we are started use our ListAdapter
         setListAdapter(mAdapter);
         // and tell loader manager to start loading
-        getLoaderManager().initLoader(0, null, this);
+        // THIS LINE REMOVED
     }
-
-    // columns requested from the database
-    private static final String[] PROJECTION = {
-            Contacts._ID, // _ID is always required
-            Contacts.DISPLAY_NAME_PRIMARY // that's what we want to display
-    };
 
     // and name should be displayed in the text1 TextView in item layout
-    private static final String[] FROM = { Contacts.DISPLAY_NAME_PRIMARY };
+    private static final String[] FROM = { AddressDatabaseContract.AddressTable.NAME };
     private static final int[] TO = { android.R.id.text1 };
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        // load from the "Contacts table"
-        Uri contentUri = Contacts.CONTENT_URI;
-
-        // no sub-selection, display_name sort order, simply every row
-        // projection says we want just the _id and the name column
-        return new CursorLoader(getActivity(), contentUri, PROJECTION, null, null, "display_name");
-
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        // Once cursor is loaded, give it to adapter
-        mAdapter.swapCursor(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // on reset take any old cursor away
-        mAdapter.swapCursor(null);
-    }
 }

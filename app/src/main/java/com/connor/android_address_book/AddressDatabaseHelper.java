@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.provider.ContactsContract;
 import android.support.v4.content.CursorLoader;
+import android.util.Log;
 
 import static com.connor.android_address_book.AddressDatabaseContract.AddressTable.CELL;
 import static com.connor.android_address_book.AddressDatabaseContract.AddressTable.NAME;
@@ -31,6 +32,7 @@ public class AddressDatabaseHelper extends SQLiteOpenHelper {
                 ContactsContract.CommonDataKinds.Phone.NUMBER};
         Cursor people = context.getContentResolver().query(uri, projection, null, null, null);
         insertCursorIntoDB(people, db);
+        Log.d("Inserted", "cursor into DB");
     }
 
     public void insertCursorIntoDB(Cursor cursor, SQLiteDatabase db) {
