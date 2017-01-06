@@ -2,6 +2,7 @@ package com.connor.android_address_book;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 
 public class ScrollingAddressEntryActivity extends AppCompatActivity {
@@ -25,12 +27,13 @@ public class ScrollingAddressEntryActivity extends AppCompatActivity {
         AddressDatabaseHelper dbHelper = new AddressDatabaseHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        Cursor c = db.rawQuery("SELECT * FROM " + AddressDatabaseContract.AddressTable.TABLE_NAME + " WHERE _id=" + id, null);
+        // select the row with the _id of the intent we received
+        Cursor c = db.query(AddressDatabaseContract.AddressTable.TABLE_NAME, new String[] {"name", "_id"}, "_id='" + id + "'", null, null, null, null);
         c.moveToFirst();
         int indexName = c.getColumnIndex(AddressDatabaseContract.AddressTable.NAME);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(c.getString(indexName));
+        toolbar.setTitle(c.getString(indexName)); // make the title the current contact's name
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

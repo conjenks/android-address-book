@@ -30,7 +30,6 @@ public class ContactsFragment extends ListFragment {
 
         Cursor c = db.rawQuery("SELECT * FROM " + AddressDatabaseContract.AddressTable.TABLE_NAME +
                 " ORDER BY " + AddressDatabaseContract.AddressTable.NAME, null);
-        Log.d("DEBUG", DatabaseUtils.dumpCursorToString(c));
         int flags = 0; // no auto-requery!
         mAdapter = new SimpleCursorAdapter(context, layout, c, FROM, TO, flags);
     }
@@ -39,7 +38,8 @@ public class ContactsFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
         Intent intent = new Intent(getActivity(), ScrollingAddressEntryActivity.class);
-        intent.putExtra("ID", id);
+        String newID = Long.toString(id);
+        intent.putExtra("ID", newID);
         startActivity(intent);
     }
 
