@@ -11,59 +11,60 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <!--the id's of the following TextView's are named after the corresponding value column indices-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/cell"
+            android:id="@+id/_2"
             android:text="Cell Phone:" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/work"
-            android:layout_below="@id/cell"
+            android:id="@+id/_3"
+            android:layout_below="@id/_2"
             android:text="Work Phone:" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/home"
-            android:layout_below="@id/work"
+            android:id="@+id/_4"
+            android:layout_below="@id/_3"
             android:text="Home Phone:" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/personal"
-            android:layout_below="@id/home"
+            android:id="@+id/_5"
+            android:layout_below="@id/_4"
             android:text="Personal Email:" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/employee"
-            android:layout_below="@id/personal"
+            android:id="@+id/_6"
+            android:layout_below="@id/_5"
             android:text="Employee Email:" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/misc"
-            android:layout_below="@id/employee"
+            android:id="@+id/_7"
+            android:layout_below="@id/_6"
             android:text="Misc. Email:" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_margin"
-            android:id="@+id/address"
-            android:layout_below="@id/misc"
+            android:id="@+id/_8"
+            android:layout_below="@id/_7"
             android:text="Address:" />
 
     </RelativeLayout>
