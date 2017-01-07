@@ -1,5 +1,6 @@
 package com.connor.android_address_book;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -10,9 +11,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.content.res.Resources;
 import android.util.Log;
+import android.support.v7.widget.Toolbar.LayoutParams;
+
+import static android.widget.RelativeLayout.BELOW;
+
 public class ScrollingAddressEntryActivity extends AppCompatActivity {
 
     @Override
@@ -29,7 +35,6 @@ public class ScrollingAddressEntryActivity extends AppCompatActivity {
         // select the row with the _id of the intent we received
         Cursor c = db.query(AddressDatabaseContract.AddressTable.TABLE_NAME, null, "_id='" + id + "'", null, null, null, null);
         c.moveToFirst();
-        final int Name = c.getColumnIndex(AddressDatabaseContract.AddressTable.NAME);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(c.getString(1)); // make the title of the activity the current contact's name
@@ -52,6 +57,8 @@ public class ScrollingAddressEntryActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.scrollingLayout);
+
         Resources res = getResources();
         for (int i = 2; i < 9; ++i) {
             Log.d("DEBUG", Integer.toString(i));
@@ -59,23 +66,18 @@ public class ScrollingAddressEntryActivity extends AppCompatActivity {
             if (c.getString(i) == null) { // if this column has no value, hide it
                 TextView tv = (TextView) findViewById(viewId);
                 tv.setVisibility(View.GONE);
-            } else {
-
+            } else { // add a new TextView under the corresponding label with the label's data from the db
+                Log.d("DEBUG", "cell");
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                params.addRule(BELOW, viewId);
+                params.setMargins(16, 0, 0, 0);
+                TextView newView = new TextView(this);
+                newView.setLayoutParams(params);
+                layout.addView(newView);
+                newView.setId(i + 100);
+                newView.setText(c.getString(i));
             }
         }
 
     }
 }
-
-//    final int Cell = c.getColumnIndex(AddressDatabaseContract.AddressTable.CELL);
-//        final int Work = c.getColumnIndex(AddressDatabaseContract.AddressTable.WORK);
-//        final int Home = c.getColumnIndex(AddressDatabaseContract.AddressTable.HOME);
-//
-//        final int Personal = c.getColumnIndex(AddressDatabaseContract.AddressTable.PERSONAL);
-//        final int Employee = c.getColumnIndex(AddressDatabaseContract.AddressTable.EMPLOYEE);
-//        final int Misc = c.getColumnIndex(AddressDatabaseContract.AddressTable.MISC);
-//
-//        final int Line1 = c.getColumnIndex(AddressDatabaseContract.AddressTable.LINE1);
-//        final int Line2 = c.getColumnIndex(AddressDatabaseContract.AddressTable.LINE2);
-//        final int CityState = c.getColumnIndex(AddressDatabaseContract.AddressTable.CITYSTATE);
-//        final int ZipCode = c.getColumnIndex(AddressDatabaseContract.AddressTable.ZIPCODE);
