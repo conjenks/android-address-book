@@ -58,24 +58,22 @@ public class ScrollingAddressEntryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.scrollingLayout);
-
         Resources res = getResources();
-        for (int i = 2; i < 9; ++i) {
+        for (int i = 2; i < 9; ++i) { // this loop access each db column's
             Log.d("DEBUG", Integer.toString(i));
             int viewId = res.getIdentifier("_" + Integer.toString(i), "id", this.getPackageName()); // get the id of a TextView by its integer title
             if (c.getString(i) == null) { // if this column has no value, hide it
                 TextView tv = (TextView) findViewById(viewId);
                 tv.setVisibility(View.GONE);
             } else { // add a new TextView under the corresponding label with the label's data from the db
-                Log.d("DEBUG", "cell");
-                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-                params.addRule(BELOW, viewId);
-                params.setMargins(16, 0, 0, 0);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT); // create params object
+                params.addRule(BELOW, viewId); // put the following TextView below the current label
+                params.setMargins(40, 0, 0, 0); // set left margin, needs updated
                 TextView newView = new TextView(this);
-                newView.setLayoutParams(params);
+                newView.setLayoutParams(params); // add layout to new TextView
                 layout.addView(newView);
                 newView.setId(i + 100);
-                newView.setText(c.getString(i));
+                newView.setText(c.getString(i)); // set the TextView's text
             }
         }
 

@@ -8,10 +8,141 @@
     tools:context="com.connor.android_address_book.EditAddressActivity"
     tools:showIn="@layout/activity_edit_address">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:id="@+id/scrollingLayout">
+
+        <!--the id's of the following TextView's are named after the corresponding column indices in the address db-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_1"
+            android:textStyle="bold"
+            android:text="Name:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_below="@id/_1"
+            android:id="@+id/editText1"
+            android:ems="10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_2"
+            android:textStyle="bold"
+            android:layout_below="@id/editText1"
+            android:text="Cell Phone:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_below="@id/_2"
+            android:id="@+id/editText2"
+            android:ems="10"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_3"
+            android:textStyle="bold"
+            android:layout_below="@id/editText2"
+            android:text="Work Phone:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_below="@id/_3"
+            android:id="@+id/editText3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_4"
+            android:textStyle="bold"
+            android:layout_below="@id/editText3"
+            android:text="Home Phone:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:layout_below="@id/_4"
+            android:id="@+id/editText4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_5"
+            android:textStyle="bold"
+            android:layout_below="@id/editText4"
+            android:text="Personal Email:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_below="@id/_5"
+            android:id="@+id/editText5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_6"
+            android:textStyle="bold"
+            android:layout_below="@id/editText5"
+            android:text="Employee Email:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_below="@id/_6"
+            android:id="@+id/editText6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_7"
+            android:textStyle="bold"
+            android:layout_below="@id/editText6"
+            android:text="Misc. Email:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_below="@id/_7"
+            android:id="@+id/editText7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:id="@+id/_8"
+            android:textStyle="bold"
+            android:layout_below="@id/editText7"
+            android:text="Address:" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            android:layout_below="@id/_8"
+            android:id="@+id/editText8" />
+
+    </RelativeLayout>
 
 </android.support.v4.widget.NestedScrollView>
