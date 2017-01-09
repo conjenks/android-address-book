@@ -60,7 +60,6 @@ public class ScrollingAddressEntryActivity extends AppCompatActivity {
         RelativeLayout layout = (RelativeLayout) findViewById(R.id.scrollingLayout);
         Resources res = getResources();
         for (int i = 2; i < 9; ++i) { // this loop access each db column's
-            Log.d("DEBUG", Integer.toString(i));
             int viewId = res.getIdentifier("_" + Integer.toString(i), "id", this.getPackageName()); // get the id of a TextView by its integer title
             if (c.getString(i) == null) { // if this column has no value, hide it
                 TextView tv = (TextView) findViewById(viewId);

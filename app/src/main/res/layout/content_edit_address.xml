@@ -25,7 +25,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="phone"
+            android:inputType="textPersonName"
             android:layout_below="@id/_1"
             android:id="@+id/editText1"
             android:ems="10"/>
@@ -146,29 +146,29 @@
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
             android:layout_below="@id/_8"
-            android:id="@+id/addressLine1"
+            android:id="@+id/editText8"
             android:ems="15"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
-            android:layout_below="@id/addressLine1"
-            android:id="@+id/addressLine2"
+            android:layout_below="@id/editText8"
+            android:id="@+id/editText9"
             android:ems="15"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
-            android:layout_below="@id/addressLine2"
-            android:id="@+id/cityState"
+            android:layout_below="@id/editText9"
+            android:id="@+id/editText10"
             android:ems="10"/>
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:layout_below="@id/addressLine2"
-            android:layout_toRightOf="@id/cityState"
-            android:id="@+id/zipCode"
+            android:layout_below="@id/editText9"
+            android:layout_toRightOf="@id/editText10"
+            android:id="@+id/editText11"
             android:ems="5"/>
 
     </RelativeLayout>
