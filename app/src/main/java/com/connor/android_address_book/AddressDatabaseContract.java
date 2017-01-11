@@ -25,6 +25,8 @@ public final class AddressDatabaseContract {
         public static final String CITYSTATE = "cityState";
         public static final String ZIPCODE = "zipCode";
 
+
+
         public static final String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME
                 + " (" + _ID + " INTEGER PRIMARY KEY," + NAME + " varchar(30), " + CELL + " varchar(15), "
                 + WORK + " varchar(15), " + HOME + " varchar(15), " + PERSONAL + " varchar(50), "

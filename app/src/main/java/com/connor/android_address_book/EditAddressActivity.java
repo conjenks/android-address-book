@@ -1,5 +1,6 @@
 package com.connor.android_address_book;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -46,20 +47,19 @@ public class EditAddressActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) { // save the EditText changes to the database
-               String statement = "UPDATE " + AddressDatabaseContract.AddressTable.TABLE_NAME + " SET "; // start constructing the SQL statement
+
+               ContentValues values = new ContentValues();
+
                for (int i = 1; i < 12; ++i) {
                    int viewId = res.getIdentifier("editText" + Integer.toString(i), "id", "com.connor.android_address_book"); // get the id of an EditText by its integer title
                    EditText edit = (EditText) findViewById(viewId);
                    String text = edit.getText().toString();
-                   if (text.trim().length() != 0) { // if the EditText field is NOT blank
-                       statement += columnNames[i] + "='" + text + "'";
-                       Log.d("DEBUG", Integer.toString(i));
-
-                   }
+                   if (text.trim().length() != 0) // if the EditText field is NOT blank
+                       values.put(columnNames[i], text); // add it to the collection of values to be updated in the database
                }
 
-               statement += "WHERE _id='" + id + "';";
-               db.execSQL(statement);
+               String WHERE = "_id='" + id + "'";
+               db.update(AddressDatabaseContract.AddressTable.TABLE_NAME, values, WHERE, null);
            }
        });
 
